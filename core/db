@@ -1,1 +1,17 @@
-Olá mundo
+{
+  "todos": [
+    {
+      "id": "8a72f700-1354-49d7-b1d0-01685381a41c",
+      "date": "2023-12-06T15:29:18.353Z",
+      "content": "Todo 1",
+      "done": false
+    },
+    {
+      "id": "56ce4d78-dfd6-46fc-a46e-8364bfc6ac37",
+      "date": "2023-12-06T15:29:18.353Z",
+      "content": "Todo 2",
+      "done": false
+    }
+  ],
+  "users": []
+}

@@ -1,0 +1,15 @@
+{
+  "name": "crud-com-qualidade",
+  "version": "1.0.0",
+  "description": "Curso Criando Crud com Qualidade do Mario Solto na Hotmart",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./core/crud.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

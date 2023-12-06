@@ -4,8 +4,10 @@ import { randomUUID } from 'crypto'
 
 const DB_FILE_PATH = "./core/db"
 
+type UUID = string;
+
 interface Todo {
-    id: string,
+    id: UUID,
     date: string,
     content: string,
     done: boolean,
@@ -54,7 +56,7 @@ function read(): Array<Todo>{
     return data.todos;
 }
 
-function update(id: string, partialTodo: Partial<Todo>){
+function update(id: UUID, partialTodo: Partial<Todo>){
     let updated_todo;
     const todos = read()
 
@@ -76,15 +78,30 @@ function update(id: string, partialTodo: Partial<Todo>){
     return updated_todo;
 }
 
-function updateContentByID(id: string, content: string): Todo {
+function updateContentByID(id: UUID, content: string): Todo {
     return update(id, {
         content
     })
 }
-function updateDoneByID(id: string, done: boolean): Todo {
+function updateDoneByID(id: UUID, done: boolean): Todo {
     return update(id, {
         done
     })
+}
+
+function deleteById(id: UUID){
+    const todos = read()
+
+    const todosWithoutOne = todos.filter((currentTodo) => {
+        if(currentTodo.id === id){
+            return false;
+        }
+        return true;
+    })
+
+    CLEAR_DB()
+
+    WRITE_FILE(todosWithoutOne)
 }
 
 function CLEAR_DB(){
@@ -93,12 +110,10 @@ function CLEAR_DB(){
 
 CLEAR_DB()
 create('Todo 1')
-create('Todo 2')
+const secondTodo = create('Todo 2')
+deleteById(secondTodo.id)
 
-const todo = create('Todo 3')
-update(todo.id, {
-    content: "New content 2",
-    done: true
-})
+const thirdTodo = create('Todo 3')
+updateContentByID(thirdTodo.id, "Todo 4")
 
 console.log(read())

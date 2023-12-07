@@ -1,14 +1,14 @@
 import React from 'react';
 // import { GlobalStyles } from '../src/theme/GlobalStyles';
-import { GlobalStylesLive } from '../src/theme/GlobalStylesLive';
+import { GlobalStyles } from '@ui/theme/GlobalStyles';
 
 function App() {
   const bg = 'https://darlley.github.io/images/header.jpg';
 
   return (
     <main>
-      {/* <GlobalStyles /> */}
-      <GlobalStylesLive />
+      {/* <GlobalStylesLive /> */}
+      <GlobalStyles themeName="indigo" />
       <header
         style={{
           backgroundImage: `url('${bg}')`,

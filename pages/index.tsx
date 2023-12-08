@@ -1,9 +1,22 @@
-import React from "react";
-// import { GlobalStyles } from '../src/theme/GlobalStyles';
+import React, { useEffect, useState } from "react";
+// import { GlobalStylesLive } from '../src/theme/GlobalStylesLive';
 import { GlobalStyles } from "@ui/theme/GlobalStyles";
+import { todoController } from "@ui/controller/todo";
 
+interface HomeTodo {
+    id: string;
+    content: string;
+    done: boolean;
+}
 function App() {
     const bg = "https://darlley.github.io/images/header.jpg";
+    const [todos, setTodos] = useState<HomeTodo[]>([]);
+
+    useEffect(() => {
+        todoController.get().then((todos) => {
+            setTodos(todos);
+        });
+    }, []);
 
     return (
         <main>
@@ -46,24 +59,20 @@ function App() {
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>
-                                <input type="checkbox" />
-                            </td>
-                            <td>d4f26</td>
-                            <td>
-                                Conteúdo de uma TODO Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit. Eaque vero facilis
-                                obcaecati, autem aliquid eius! Consequatur eaque
-                                doloribus laudantium soluta optio odit,
-                                provident, ab voluptates doloremque voluptas
-                                recusandae aspernatur aperiam.
-                            </td>
-                            <td align="right">
-                                <button data-type="delete">Apagar</button>
-                            </td>
-                        </tr>
-
+                        {todos.map((todo) => (
+                            <tr key={todo.id}>
+                                <td>
+                                    <input type="checkbox" />
+                                </td>
+                                <td title={todo.id}>
+                                    {todo.id.substring(0, 5)}...
+                                </td>
+                                <td>{todo.content}</td>
+                                <td align="right">
+                                    <button data-type="delete">Apagar</button>
+                                </td>
+                            </tr>
+                        ))}
                         <tr>
                             <td
                                 colSpan={4}

@@ -1,0 +1,12 @@
+GET http://localhost:3000/api/todos
+
+
+###
+
+POST http://localhost:3000/api/todos
+Content-Type: application/json
+
+{
+    "content": "Todo 2",
+    "done": false
+}

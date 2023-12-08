@@ -27,7 +27,14 @@
     "paths": {                                           /* Specify a set of entries that re-map imports to additional lookup locations. */
       "@ui/*": [
         "src/ui/*"
+      ],
+      "@db-crud-todo": [
+        "core/crud.ts"
+      ],
+      "@server/*": [
+        "src/server/*"
       ]
+
     },
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

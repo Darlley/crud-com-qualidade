@@ -49,7 +49,7 @@ function create(content: string): Todo {
     return todo;
 }
 
-function read(): Array<Todo> {
+export function read(): Array<Todo> {
     const response = fs.readFileSync(DB_FILE_PATH, "utf-8");
     const data = JSON.parse(response || "{}");
 
@@ -107,12 +107,12 @@ function CLEAR_DB() {
     fs.writeFileSync(DB_FILE_PATH, "");
 }
 
-CLEAR_DB();
-create("Todo 1");
-const secondTodo = create("Todo 2");
-deleteById(secondTodo.id);
+// CLEAR_DB();
+// create("Todo 1");
+// const secondTodo = create("Todo 2");
+// deleteById(secondTodo.id);
 
-const thirdTodo = create("Todo 3");
-updateContentByID(thirdTodo.id, "Todo 4");
+// const thirdTodo = create("Todo 3");
+// updateContentByID(thirdTodo.id, "Todo 4");
 
-console.log(read());
+// console.log(read());

@@ -8,15 +8,23 @@ interface HomeTodo {
     content: string;
     done: boolean;
 }
+const bg = "https://darlley.github.io/images/header.jpg";
+
 function App() {
-    const bg = "https://darlley.github.io/images/header.jpg";
+    const [totalPage, setTotalPages] = useState(0);
+    const [page, setPage] = useState(1);
     const [todos, setTodos] = useState<HomeTodo[]>([]);
 
+    const hasMorePages = totalPage > page;
+
     useEffect(() => {
-        todoController.get().then((todos) => {
-            setTodos(todos);
+        todoController.get({ page }).then(({ todos, pages }) => {
+            setTodos((prev) => {
+                return [...prev, ...todos];
+            });
+            setTotalPages(pages);
         });
-    }, []);
+    }, [page]);
 
     return (
         <main>
@@ -90,23 +98,40 @@ function App() {
                         </tr>
 
                         <tr>
-                            <td
-                                colSpan={4}
-                                align="center"
-                                style={{ textAlign: "center" }}
-                            >
-                                <button data-type="load-more">
-                                    Carregar mais{" "}
-                                    <span
+                            <td colSpan={1}>Página {page}</td>
+                            <td colSpan={2} align="center">
+                                {hasMorePages ? (
+                                    <button
+                                        data-type="load-more"
+                                        onClick={() =>
+                                            setPage((prev) => prev + 1)
+                                        }
+                                    >
+                                        Carregar mais{" "}
+                                        <span
+                                            style={{
+                                                display: "inline-block",
+                                                marginLeft: "4px",
+                                                fontSize: "1.2em",
+                                            }}
+                                        >
+                                            ↓
+                                        </span>
+                                    </button>
+                                ) : (
+                                    <button
+                                        disabled={true}
+                                        data-type="load-more"
                                         style={{
-                                            display: "inline-block",
-                                            marginLeft: "4px",
-                                            fontSize: "1.2em",
+                                            opacity: "50%",
                                         }}
                                     >
-                                        ↓
-                                    </span>
-                                </button>
+                                        Fim
+                                    </button>
+                                )}
+                            </td>
+                            <td colSpan={1} align="right">
+                                Total
                             </td>
                         </tr>
                     </tbody>

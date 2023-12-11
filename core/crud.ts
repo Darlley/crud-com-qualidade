@@ -108,7 +108,7 @@ function CLEAR_DB() {
 }
 
 // CLEAR_DB();
-// create("Todo 1");
+// create("Todo 6");
 // const secondTodo = create("Todo 2");
 // deleteById(secondTodo.id);
 

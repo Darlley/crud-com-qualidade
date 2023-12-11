@@ -1,13 +1,13 @@
-async function get() {
-    return fetch("/api/todos")
-        .then(async (response) => {
-            const data = await response.text();
-            const todos = JSON.parse(data).todos;
-            return todos;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+import { todoRepository } from "@ui/repository/todo";
+
+interface TodoControllerGetParams {
+    page: number;
+}
+async function get(params: TodoControllerGetParams) {
+    return todoRepository.get({
+        page: params.page,
+        limit: 4,
+    });
 }
 
 export const todoController = { get };

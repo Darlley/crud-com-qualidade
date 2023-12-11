@@ -7,6 +7,6 @@ POST http://localhost:3000/api/todos
 Content-Type: application/json
 
 {
-    "content": "Todo 2",
+    "content": "Todo 6",
     "done": false
 }

@@ -14,11 +14,13 @@ function App() {
     const [initialLoadComplete, setInitialLoadComplete] = useState(false);
     const [totalPage, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
-    const [isLoading, setIsLoading] = useState(true);
+    const [search, setSearch] = useState("");
     const [todos, setTodos] = useState<HomeTodo[]>([]);
-    const hasNoMoreTodos = todos.length === 0 && !isLoading;
+    const homeTodos = todoController.filterTodosByContent<HomeTodo[]>(todos, search);
+    const [isLoading, setIsLoading] = useState(true);
+    const hasNoMoreTodos = homeTodos.length === 0 && !isLoading;
 
-    console.log(totalPage, page, todos);
+    // setTodos(filteredTodos);
 
     const hasMorePages = totalPage > page;
 
@@ -62,6 +64,8 @@ function App() {
                     <input
                         type="text"
                         placeholder="Filtrar lista atual, ex: Dentista"
+                        onChange={(event) => setSearch(event.target.value)}
+                        value={search}
                     />
                 </form>
 
@@ -78,7 +82,7 @@ function App() {
                     </thead>
 
                     <tbody>
-                        {todos.map((todo) => (
+                        {homeTodos.map((todo) => (
                             <tr key={todo.id}>
                                 <td>
                                     <input type="checkbox" />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // import { GlobalStylesLive } from '../src/theme/GlobalStylesLive';
 import { GlobalStyles } from "@ui/theme/GlobalStyles";
 import { todoController } from "@ui/controller/todo";
@@ -11,7 +11,8 @@ interface HomeTodo {
 const bg = "https://darlley.github.io/images/header.jpg";
 
 function App() {
-    const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+    // const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+    const initialLoadComplete = useRef(false);
     const [totalPage, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
@@ -25,8 +26,8 @@ function App() {
     const hasMorePages = totalPage > page;
 
     useEffect(() => {
-        setInitialLoadComplete(true);
-        if (!initialLoadComplete) {
+        // setInitialLoadComplete(true);
+        if (!initialLoadComplete.current) {
             todoController
                 .get({ page })
                 .then(({ todos, pages }) => {
@@ -35,6 +36,7 @@ function App() {
                 })
                 .finally(() => {
                     setIsLoading(false);
+                    initialLoadComplete.current = true;
                 });
         }
     }, [page]);

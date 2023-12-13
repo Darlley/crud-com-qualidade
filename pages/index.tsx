@@ -11,19 +11,30 @@ interface HomeTodo {
 const bg = "https://darlley.github.io/images/header.jpg";
 
 function App() {
+    const [initialLoadComplete, setInitialLoadComplete] = useState(false);
     const [totalPage, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
     const [todos, setTodos] = useState<HomeTodo[]>([]);
+    const hasNoMoreTodos = todos.length === 0 && !isLoading;
+
+    console.log(totalPage, page, todos);
 
     const hasMorePages = totalPage > page;
 
     useEffect(() => {
-        todoController.get({ page }).then(({ todos, pages }) => {
-            setTodos((prev) => {
-                return [...prev, ...todos];
-            });
-            setTotalPages(pages);
-        });
+        setInitialLoadComplete(true);
+        if (!initialLoadComplete) {
+            todoController
+                .get({ page })
+                .then(({ todos, pages }) => {
+                    setTodos(todos);
+                    setTotalPages(pages);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        }
     }, [page]);
 
     return (
@@ -81,21 +92,26 @@ function App() {
                                 </td>
                             </tr>
                         ))}
-                        <tr>
-                            <td
-                                colSpan={4}
-                                align="center"
-                                style={{ textAlign: "center" }}
-                            >
-                                Carregando...
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td colSpan={4} align="center">
-                                Nenhum item encontrado
-                            </td>
-                        </tr>
+                        {isLoading && (
+                            <tr>
+                                <td
+                                    colSpan={4}
+                                    align="center"
+                                    style={{ textAlign: "center" }}
+                                >
+                                    Carregando...
+                                </td>
+                            </tr>
+                        )}
+
+                        {hasNoMoreTodos && (
+                            <tr>
+                                <td colSpan={4} align="center">
+                                    Nenhum item encontrado
+                                </td>
+                            </tr>
+                        )}
 
                         <tr>
                             <td colSpan={1}>Página {page}</td>
@@ -103,9 +119,24 @@ function App() {
                                 {hasMorePages ? (
                                     <button
                                         data-type="load-more"
-                                        onClick={() =>
-                                            setPage((prev) => prev + 1)
-                                        }
+                                        onClick={() => {
+                                            const nextPage = page + 1;
+                                            setPage(nextPage);
+                                            setIsLoading(true);
+
+                                            todoController
+                                                .get({ page: nextPage })
+                                                .then(({ todos, pages }) => {
+                                                    setTodos((prev) => [
+                                                        ...prev,
+                                                        ...todos,
+                                                    ]);
+                                                    setTotalPages(pages);
+                                                })
+                                                .finally(() => {
+                                                    setIsLoading(false);
+                                                });
+                                        }}
                                     >
                                         Carregar mais{" "}
                                         <span

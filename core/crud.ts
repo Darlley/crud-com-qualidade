@@ -31,7 +31,7 @@ function WRITE_FILE(todos: Array<Todo>) {
     );
 }
 
-function create(content: string): Todo {
+export function create(content: string): Todo {
     const todo: Todo = {
         id: randomUUID(),
         date: new Date().toISOString(),

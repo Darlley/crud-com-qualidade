@@ -6,7 +6,11 @@ export default function handler(
     response: NextApiResponse,
 ) {
     if (request.method === "GET") {
-        TodoControler.getTodo(request, response);
+        return TodoControler.getTodo(request, response);
+    }
+
+    if (request.method === "POST") {
+        return TodoControler.create(request, response);
     }
 
     const METHOD = request.method;

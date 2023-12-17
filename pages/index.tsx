@@ -13,11 +13,15 @@ const bg = "https://darlley.github.io/images/header.jpg";
 function App() {
     // const [initialLoadComplete, setInitialLoadComplete] = useState(false);
     const initialLoadComplete = useRef(false);
+    const [newTodoContent, setNewTodoContent] = useState("");
     const [totalPage, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
     const [todos, setTodos] = useState<HomeTodo[]>([]);
-    const homeTodos = todoController.filterTodosByContent<HomeTodo[]>(todos, search);
+    const homeTodos = todoController.filterTodosByContent<HomeTodo[]>(
+        todos,
+        search,
+    );
     const [isLoading, setIsLoading] = useState(true);
     const hasNoMoreTodos = homeTodos.length === 0 && !isLoading;
 
@@ -53,8 +57,31 @@ function App() {
                 <div className="typewriter">
                     <h1>O que fazer hoje?</h1>
                 </div>
-                <form>
-                    <input type="text" placeholder="Correr, Estudar..." />
+                <form
+                    onSubmit={(event) => {
+                        event?.preventDefault();
+                        todoController.create({
+                            content: newTodoContent,
+                            onSuccess(todo: HomeTodo) {
+                                setTodos((prev) => [...prev, todo]);
+                            },
+                            onError() {
+                                alert(
+                                    "Você precisa ter um conteúdo para criar uma todo.",
+                                );
+                            },
+                        });
+                        setNewTodoContent("");
+                    }}
+                >
+                    <input
+                        type="text"
+                        placeholder="Correr, Estudar..."
+                        value={newTodoContent}
+                        onChange={function newTodoHandler(event) {
+                            setNewTodoContent(event.target.value);
+                        }}
+                    />
                     <button type="submit" aria-label="Adicionar novo item">
                         +
                     </button>

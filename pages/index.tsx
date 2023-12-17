@@ -63,7 +63,7 @@ function App() {
                         todoController.create({
                             content: newTodoContent,
                             onSuccess(todo: HomeTodo) {
-                                setTodos((prev) => [...prev, todo]);
+                                setTodos((prev) => [todo, ...prev]);
                             },
                             onError() {
                                 alert(

@@ -62,9 +62,33 @@ export async function createByContent(content: string): Promise<Todo> {
     throw new Error("Failed to create TODO: ");
 }
 
+async function toggleDone(todoId: string) {
+    const response = await fetch(`/api/todos/${todoId}/toggle-done`, {
+        method: "PUT",
+    });
+
+    if (response.ok) {
+        const serverResponse = await response.json();
+        const ServerResponseSchema = zodSchema.object({
+            todo: TodoSchema,
+        });
+        const serverResponseParsed =
+            ServerResponseSchema.safeParse(serverResponse);
+        if (!serverResponseParsed.success) {
+            throw new Error(`Failed to updated TODO id: ${todoId}`);
+        }
+
+        const updatedTodo = serverResponseParsed.data.todo;
+        return updatedTodo;
+    }
+
+    throw new Error("Server error");
+}
+
 export const todoRepository = {
     get,
     createByContent,
+    toggleDone,
 };
 
 // interface Todo {

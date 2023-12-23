@@ -100,9 +100,9 @@
       "id": "7f63744f-2d39-4290-b086-18ad5ad74389",
       "date": "2023-12-17T01:41:54.797Z",
       "content": "5.1 - Parte 3 ✅",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-17T01:41:54.798Z",
-      "updated_at": "2023-12-17T01:41:54.798Z"
+      "updated_at": "2023-12-23T01:30:41.888Z"
     },
     {
       "id": "5c2f9d7b-f60f-455a-890e-e5d7bcad7ec5",
@@ -110,7 +110,7 @@
       "content": "5.1 - Parte 3 ok ✅",
       "done": false,
       "created_at": "2023-12-17T01:43:16.483Z",
-      "updated_at": "2023-12-17T01:43:16.483Z"
+      "updated_at": "2023-12-23T01:30:39.187Z"
     }
   ],
   "users": []

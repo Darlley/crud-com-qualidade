@@ -114,7 +114,13 @@ function App() {
                         {homeTodos.map((todo) => (
                             <tr key={todo.id}>
                                 <td>
-                                    <input type="checkbox" />
+                                    <input
+                                        type="checkbox"
+                                        defaultChecked={todo.done}
+                                        onChange={function handleToggle() {
+                                            todoController.toggleDone(todo.id);
+                                        }}
+                                    />
                                 </td>
                                 <td title={todo.id}>
                                     {todo.id.substring(0, 5)}...

@@ -48,4 +48,8 @@ function create({ content, onSuccess, onError }: TodoControllerCreateParams) {
         });
 }
 
-export const todoController = { get, filterTodosByContent, create };
+function toggleDone(todoId: string) {
+    todoRepository.toggleDone(todoId);
+}
+
+export const todoController = { get, filterTodosByContent, create, toggleDone };

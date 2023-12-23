@@ -60,7 +60,7 @@ export function read(): Array<Todo> {
     return data.todos;
 }
 
-function update(id: UUID, partialTodo: Partial<Todo>) {
+export function update(id: UUID, partialTodo: Partial<Todo>) {
     let updated_todo;
     const todos = read();
 

@@ -8,4 +8,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Lint"
-              run: "echo 'ok'"
+              run: "npm run lint"

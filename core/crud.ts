@@ -82,12 +82,6 @@ export function update(id: UUID, partialTodo: Partial<Todo>) {
     return updated_todo;
 }
 
-function updateContentByID(id: UUID, content: string): Todo {
-    return update(id, {
-        content,
-    });
-}
-
 export function deleteById(id: UUID) {
     const todos = read();
 

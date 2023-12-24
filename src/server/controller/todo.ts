@@ -103,7 +103,6 @@ async function deleteById(req: NextApiRequest, res: NextApiResponse) {
             message: `Internal server error`,
         },
     });
-
 }
 
 export const todoController = {

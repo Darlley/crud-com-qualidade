@@ -120,8 +120,10 @@ function App() {
                                         onChange={function handleToggle() {
                                             todoController.toggleDone({
                                                 id: todo.id,
-                                                onError(){
-                                                    alert("Falha ao atualizar o todo :(");
+                                                onError() {
+                                                    alert(
+                                                        "Falha ao atualizar o todo :(",
+                                                    );
                                                 },
                                                 optimisticUpdate() {
                                                     setTodos((prev) => {
@@ -158,7 +160,32 @@ function App() {
                                     )}
                                 </td>
                                 <td align="right">
-                                    <button data-type="delete">Apagar</button>
+                                    <button
+                                        data-type="delete"
+                                        onClick={() => {
+                                            todoController
+                                                .deleteById(todo.id)
+                                                .then(() => {
+                                                    setTodos((prev) => {
+                                                        return prev.filter(
+                                                            (currentTodo) => {
+                                                                return (
+                                                                    currentTodo.id !==
+                                                                    todo.id
+                                                                );
+                                                            },
+                                                        );
+                                                    });
+                                                })
+                                                .catch(() => {
+                                                    console.error(
+                                                        "Failed to deleted",
+                                                    );
+                                                });
+                                        }}
+                                    >
+                                        Apagar
+                                    </button>
                                 </td>
                             </tr>
                         ))}

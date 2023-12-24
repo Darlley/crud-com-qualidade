@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { z as zodSchema } from "zod";
 import { todoRepository } from "@server/repository/todo";
+import { HttpNotFoundError } from "@server/infra/errors";
 
 async function getTodo(req: NextApiRequest, res: NextApiResponse) {
     const query = req.query;
@@ -72,17 +73,23 @@ async function toggleDone(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function deleteById(req: NextApiRequest, res: NextApiResponse) {
-    const todoId = req.query.id as string;
-
-    try {
-        await todoRepository.deleteById(todoId);
-        res.status(200).json({
-            debug: {
-                todoId,
+    const QuerySchema = zodSchema.object({
+        id: zodSchema.string().uuid().min(1),
+    });
+    const parseQuery = QuerySchema.safeParse(req.query);
+    if (!parseQuery.success) {
+        return res.status(400).json({
+            error: {
+                message: `You must to provide a valid id`,
             },
         });
+    }
+    try {
+        const todoId = parseQuery.data.id;
+        await todoRepository.deleteById(todoId);
+        res.status(204).end();
     } catch (error) {
-        if (error instanceof Error) {
+        if (error instanceof HttpNotFoundError) {
             return res.status(error.status).json({
                 error: {
                     message: error.message,
@@ -91,9 +98,9 @@ async function deleteById(req: NextApiRequest, res: NextApiResponse) {
         }
     }
 
-    return res.status(400).json({
+    return res.status(500).json({
         error: {
-            message: `Failed to delete resource with id "${todoId}" :(`,
+            message: `Internal server error`,
         },
     });
 

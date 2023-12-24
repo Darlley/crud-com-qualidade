@@ -7,6 +7,13 @@ POST http://localhost:3000/api/todos
 Content-Type: application/json
 
 {
-    "content": "Todo 6",
-    "done": false
+    "content": "Meu Todo 3 (Darlley)"
 }
+
+###
+
+DELETE http://localhost:3000/api/todos/16d83618-df51-40c4-bd4d-58c34213db7b
+
+###
+
+DELETE http://localhost:3000/api/todos/euque

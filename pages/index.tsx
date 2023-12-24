@@ -13,11 +13,15 @@ const bg = "https://darlley.github.io/images/header.jpg";
 function App() {
     // const [initialLoadComplete, setInitialLoadComplete] = useState(false);
     const initialLoadComplete = useRef(false);
+    const [newTodoContent, setNewTodoContent] = useState("");
     const [totalPage, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("");
     const [todos, setTodos] = useState<HomeTodo[]>([]);
-    const homeTodos = todoController.filterTodosByContent<HomeTodo[]>(todos, search);
+    const homeTodos = todoController.filterTodosByContent<HomeTodo[]>(
+        todos,
+        search,
+    );
     const [isLoading, setIsLoading] = useState(true);
     const hasNoMoreTodos = homeTodos.length === 0 && !isLoading;
 
@@ -53,8 +57,32 @@ function App() {
                 <div className="typewriter">
                     <h1>O que fazer hoje?</h1>
                 </div>
-                <form>
-                    <input type="text" placeholder="Correr, Estudar..." />
+                <form
+                    onSubmit={(event) => {
+                        event?.preventDefault();
+                        todoController.create({
+                            content: newTodoContent,
+                            onSuccess(todo: HomeTodo) {
+                                setTodos((prev) => [todo, ...prev]);
+                            },
+                            onError() {
+                                alert(
+                                    "Você precisa ter um conteúdo para criar uma todo.",
+                                );
+                            },
+                        });
+                        setNewTodoContent("");
+                    }}
+                >
+                    <input
+                        name="add-todo"
+                        type="text"
+                        placeholder="Correr, Estudar..."
+                        value={newTodoContent}
+                        onChange={function newTodoHandler(event) {
+                            setNewTodoContent(event.target.value);
+                        }}
+                    />
                     <button type="submit" aria-label="Adicionar novo item">
                         +
                     </button>
@@ -87,14 +115,78 @@ function App() {
                         {homeTodos.map((todo) => (
                             <tr key={todo.id}>
                                 <td>
-                                    <input type="checkbox" />
+                                    <input
+                                        type="checkbox"
+                                        checked={todo.done}
+                                        onChange={function handleToggle() {
+                                            todoController.toggleDone({
+                                                id: todo.id,
+                                                onError() {
+                                                    alert(
+                                                        "Falha ao atualizar o todo :(",
+                                                    );
+                                                },
+                                                optimisticUpdate() {
+                                                    setTodos((prev) => {
+                                                        return prev.map(
+                                                            (currentTodo) => {
+                                                                if (
+                                                                    currentTodo.id ===
+                                                                    todo.id
+                                                                ) {
+                                                                    return {
+                                                                        ...currentTodo,
+                                                                        done: !currentTodo.done,
+                                                                    };
+                                                                }
+
+                                                                return currentTodo;
+                                                            },
+                                                        );
+                                                    });
+                                                },
+                                            });
+                                        }}
+                                    />
                                 </td>
                                 <td title={todo.id}>
                                     {todo.id.substring(0, 5)}...
                                 </td>
-                                <td>{todo.content}</td>
+                                <td>
+                                    {!todo.done && todo.content}
+                                    {todo.done && (
+                                        <>
+                                            ✅ <s>{todo.content}</s>
+                                        </>
+                                    )}
+                                </td>
                                 <td align="right">
-                                    <button data-type="delete">Apagar</button>
+                                    <button
+                                        data-type="delete"
+                                        onClick={() => {
+                                            todoController
+                                                .deleteById(todo.id)
+                                                .then(() => {
+                                                    setTodos((prev) => {
+                                                        return prev.filter(
+                                                            (currentTodo) => {
+                                                                return (
+                                                                    currentTodo.id !==
+                                                                    todo.id
+                                                                );
+                                                            },
+                                                        );
+                                                    });
+                                                })
+                                                .catch(() => {
+                                                    console.error(
+                                                        "Failed to deleted",
+                                                    );
+                                                });
+                                        }}
+                                    >
+                                        Apagar
+                                    </button>
                                 </td>
                             </tr>
                         ))}

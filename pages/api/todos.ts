@@ -1,12 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { TodoControler } from "@server/controller/todo";
+import { todoController } from "@server/controller/todo";
 
 export default function handler(
     request: NextApiRequest,
     response: NextApiResponse,
 ) {
     if (request.method === "GET") {
-        TodoControler.getTodo(request, response);
+        return todoController.getTodo(request, response);
+    }
+
+    if (request.method === "POST") {
+        return todoController.create(request, response);
     }
 
     const METHOD = request.method;

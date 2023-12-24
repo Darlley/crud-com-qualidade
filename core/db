@@ -1,13 +1,4 @@
 {
-  "todos": [
-    {
-      "id": "f21b18ca-8c9c-40ab-a709-32eed69c5f6d",
-      "date": "2023-12-24T01:37:00.214Z",
-      "content": "testar delete",
-      "done": false,
-      "created_at": "2023-12-24T01:37:00.214Z",
-      "updated_at": "2023-12-24T01:37:00.214Z"
-    }
-  ],
+  "todos": [],
   "users": []
 }

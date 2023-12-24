@@ -5,8 +5,8 @@ export default function handler(
     request: NextApiRequest,
     response: NextApiResponse,
 ) {
-    if (request.method === "PUT") {
-        return todoController.toggleDone(request, response);
+    if (request.method === "DELETE") {
+        return todoController.deleteById(request, response);
     }
 
     return response.status(405).json({

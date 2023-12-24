@@ -22,6 +22,7 @@ async function getTodo(req: NextApiRequest, res: NextApiResponse) {
 const TodoCreateBodySchema = zodSchema.object({
     content: zodSchema.string(),
 });
+
 async function create(req: NextApiRequest, res: NextApiResponse) {
     const body = TodoCreateBodySchema.safeParse(req.body);
     if (!body.success) {
@@ -69,8 +70,38 @@ async function toggleDone(req: NextApiRequest, res: NextApiResponse) {
         }
     }
 }
-export const TodoControler = {
+
+async function deleteById(req: NextApiRequest, res: NextApiResponse) {
+    const todoId = req.query.id as string;
+
+    try {
+        await todoRepository.deleteById(todoId);
+        res.status(200).json({
+            debug: {
+                todoId,
+            },
+        });
+    } catch (error) {
+        if (error instanceof Error) {
+            return res.status(error.status).json({
+                error: {
+                    message: error.message,
+                },
+            });
+        }
+    }
+
+    return res.status(400).json({
+        error: {
+            message: `Failed to delete resource with id "${todoId}" :(`,
+        },
+    });
+
+}
+
+export const todoController = {
     getTodo,
     create,
     toggleDone,
+    deleteById,
 };

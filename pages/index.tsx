@@ -116,16 +116,47 @@ function App() {
                                 <td>
                                     <input
                                         type="checkbox"
-                                        defaultChecked={todo.done}
+                                        checked={todo.done}
                                         onChange={function handleToggle() {
-                                            todoController.toggleDone(todo.id);
+                                            todoController.toggleDone({
+                                                id: todo.id,
+                                                onError(){
+                                                    alert("Falha ao atualizar o todo :(");
+                                                },
+                                                optimisticUpdate() {
+                                                    setTodos((prev) => {
+                                                        return prev.map(
+                                                            (currentTodo) => {
+                                                                if (
+                                                                    currentTodo.id ===
+                                                                    todo.id
+                                                                ) {
+                                                                    return {
+                                                                        ...currentTodo,
+                                                                        done: !currentTodo.done,
+                                                                    };
+                                                                }
+
+                                                                return currentTodo;
+                                                            },
+                                                        );
+                                                    });
+                                                },
+                                            });
                                         }}
                                     />
                                 </td>
                                 <td title={todo.id}>
                                     {todo.id.substring(0, 5)}...
                                 </td>
-                                <td>{todo.content}</td>
+                                <td>
+                                    {!todo.done && todo.content}
+                                    {todo.done && (
+                                        <>
+                                            ✅ <s>{todo.content}</s>
+                                        </>
+                                    )}
+                                </td>
                                 <td align="right">
                                     <button data-type="delete">Apagar</button>
                                 </td>

@@ -4,9 +4,9 @@
       "id": "48314c3c-5cea-4873-b1fb-081b0e03cc4a",
       "date": "2023-12-08T12:57:45.028Z",
       "content": "Todo 1",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-08T12:57:45.028Z",
-      "updated_at": "2023-12-08T12:57:45.028Z"
+      "updated_at": "2023-12-23T22:26:37.028Z"
     },
     {
       "id": "9363d230-fa1c-4486-8ca8-87dc33266a99",
@@ -20,81 +20,81 @@
       "id": "37414163-f2bf-4506-8f0b-a72018fd7f12",
       "date": "2023-12-16T23:06:45.208Z",
       "content": "Meu Todo (Darlley)",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-16T23:06:45.209Z",
-      "updated_at": "2023-12-16T23:06:45.209Z"
+      "updated_at": "2023-12-23T22:26:34.494Z"
     },
     {
       "id": "54614150-edf9-4dc5-841e-9758fd1f74cf",
       "date": "2023-12-16T23:08:24.875Z",
       "content": "Meu Todo (Darlley)",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-16T23:08:24.875Z",
-      "updated_at": "2023-12-16T23:08:24.875Z"
+      "updated_at": "2023-12-23T22:26:35.069Z"
     },
     {
       "id": "9781a9c7-0d51-422d-a88a-0eb688712fd5",
       "date": "2023-12-16T23:09:11.653Z",
       "content": "Meu Todo (Darlley)",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-16T23:09:11.653Z",
-      "updated_at": "2023-12-16T23:09:11.653Z"
+      "updated_at": "2023-12-23T22:26:32.024Z"
     },
     {
       "id": "413286fe-b012-49ad-bb25-43bcdf5507d7",
       "date": "2023-12-16T23:09:27.935Z",
       "content": "Meu Todo 2 (Darlley)",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-16T23:09:27.935Z",
-      "updated_at": "2023-12-16T23:09:27.935Z"
+      "updated_at": "2023-12-23T22:26:32.401Z"
     },
     {
       "id": "40586213-579c-46e4-886a-7d70367aeb66",
       "date": "2023-12-16T23:24:28.210Z",
       "content": "Meu Todo 3 (Darlley)",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-16T23:24:28.210Z",
-      "updated_at": "2023-12-16T23:24:28.210Z"
+      "updated_at": "2023-12-23T22:26:29.250Z"
     },
     {
       "id": "4f814333-ec80-450f-841b-6efdddfa72a7",
       "date": "2023-12-17T01:19:34.925Z",
       "content": "oi",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-17T01:19:34.925Z",
-      "updated_at": "2023-12-17T01:19:34.925Z"
+      "updated_at": "2023-12-23T22:26:29.860Z"
     },
     {
       "id": "9a447460-f072-4b3b-b63e-3fa69296a750",
       "date": "2023-12-17T01:20:55.597Z",
       "content": "oi",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-17T01:20:55.597Z",
-      "updated_at": "2023-12-17T01:20:55.597Z"
+      "updated_at": "2023-12-23T22:26:25.322Z"
     },
     {
       "id": "554c1dfa-3c00-4c5f-8246-23fdb5888de2",
       "date": "2023-12-17T01:20:58.790Z",
       "content": "oii",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-17T01:20:58.790Z",
-      "updated_at": "2023-12-17T01:20:58.790Z"
+      "updated_at": "2023-12-23T22:26:26.618Z"
     },
     {
       "id": "261a9b10-4dbb-4d42-ac33-5fbfa3fdd6f3",
       "date": "2023-12-17T01:21:02.571Z",
       "content": "oiii",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-17T01:21:02.571Z",
-      "updated_at": "2023-12-17T01:21:02.571Z"
+      "updated_at": "2023-12-23T22:26:21.154Z"
     },
     {
       "id": "23af599a-e862-440f-a974-a0b92f661b1a",
       "date": "2023-12-17T01:22:40.461Z",
       "content": "Estudar",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-17T01:22:40.461Z",
-      "updated_at": "2023-12-17T01:22:40.461Z"
+      "updated_at": "2023-12-23T22:26:20.357Z"
     },
     {
       "id": "7f63744f-2d39-4290-b086-18ad5ad74389",
@@ -102,15 +102,23 @@
       "content": "5.1 - Parte 3 ✅",
       "done": true,
       "created_at": "2023-12-17T01:41:54.798Z",
-      "updated_at": "2023-12-23T01:30:41.888Z"
+      "updated_at": "2023-12-23T22:26:16.265Z"
     },
     {
       "id": "5c2f9d7b-f60f-455a-890e-e5d7bcad7ec5",
       "date": "2023-12-17T01:43:16.483Z",
       "content": "5.1 - Parte 3 ok ✅",
-      "done": false,
+      "done": true,
       "created_at": "2023-12-17T01:43:16.483Z",
-      "updated_at": "2023-12-23T01:30:39.187Z"
+      "updated_at": "2023-12-23T22:43:36.025Z"
+    },
+    {
+      "id": "16d83618-df51-40c4-bd4d-58c34213db7b",
+      "date": "2023-12-23T23:21:40.666Z",
+      "content": "Meu Todo 3 (Darlley)",
+      "done": false,
+      "created_at": "2023-12-23T23:21:40.666Z",
+      "updated_at": "2023-12-23T23:21:40.666Z"
     }
   ],
   "users": []

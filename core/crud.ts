@@ -60,7 +60,7 @@ export function read(): Array<Todo> {
     return data.todos;
 }
 
-function update(id: UUID, partialTodo: Partial<Todo>) {
+export function update(id: UUID, partialTodo: Partial<Todo>) {
     let updated_todo;
     const todos = read();
 
@@ -82,13 +82,7 @@ function update(id: UUID, partialTodo: Partial<Todo>) {
     return updated_todo;
 }
 
-function updateContentByID(id: UUID, content: string): Todo {
-    return update(id, {
-        content,
-    });
-}
-
-function deleteById(id: UUID) {
+export function deleteById(id: UUID) {
     const todos = read();
 
     const todosWithoutOne = todos.filter((currentTodo) => {

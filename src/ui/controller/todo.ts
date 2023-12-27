@@ -48,4 +48,35 @@ function create({ content, onSuccess, onError }: TodoControllerCreateParams) {
         });
 }
 
-export const todoController = { get, filterTodosByContent, create };
+interface TodoControllerToggleDoneParams {
+    id: string;
+    optimisticUpdate: () => void;
+    onError: () => void;
+}
+function toggleDone({
+    id,
+    optimisticUpdate,
+    onError,
+}: TodoControllerToggleDoneParams) {
+    todoRepository
+        .toggleDone(id)
+        .then(() => {
+            optimisticUpdate();
+        })
+        .catch(() => {
+            onError();
+        });
+}
+
+async function deleteById(id: string): Promise<void> {
+    const todoId = id;
+    await todoRepository.deleteById(todoId);
+}
+
+export const todoController = {
+    get,
+    filterTodosByContent,
+    create,
+    toggleDone,
+    deleteById,
+};

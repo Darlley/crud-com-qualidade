@@ -9,3 +9,11 @@ Content-Type: application/json
 {
     "content": "Meu Todo 3 (Darlley)"
 }
+
+###
+
+DELETE http://localhost:3000/api/todos/16d83618-df51-40c4-bd4d-58c34213db7b
+
+###
+
+DELETE http://localhost:3000/api/todos/euque

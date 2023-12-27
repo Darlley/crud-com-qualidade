@@ -22,10 +22,8 @@ describe("/ - todos feed", () => {
             });
         }).as("createTodo");
         cy.visit(BASE_URL);
-        const $inputAddTodo = cy.get("input[name='add-todo']");
-        $inputAddTodo.type("Esta criando a todo");
-        const $btnAddTodo = cy.get("[aria-label='Adicionar novo item']");
-        $btnAddTodo.click();
+        cy.get("input[name='add-todo']").type("Esta criando a todo");
+        cy.get("[aria-label='Adicionar novo item']").click();
         cy.get("table > tbody").contains("Esta criando a todo");
     });
 });
